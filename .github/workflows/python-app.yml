@@ -2,7 +2,7 @@ name: Splitwise-YNAB Sync
 
 on:
   schedule:
-    - cron: '0 12 * * *'    # h >= 12 as UTC ranges from -12 to +14
+    - cron: '25 */4 * * *'    # h >= 12 as UTC ranges from -12 to +14
   workflow_dispatch:  # Manual trigger
 
 jobs:
@@ -13,7 +13,7 @@ jobs:
     - name: Checkout branch
       uses: actions/checkout@v3
       with:
-        ref: main  # branch
+        ref: test-playground  # branch
 
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
@@ -33,4 +33,5 @@ jobs:
         ynab_personal_access_token: ${{ secrets.ynab_personal_access_token }}
         ynab_budget_name: ${{ vars.ynab_budget_name }}
         ynab_account_name: ${{ vars.ynab_account_name }}
+        ynab_payee_name: ${{ vars.ynab_payee_name }}
       run: python main.py
